@@ -12,9 +12,6 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les sessions
 def est_authentifie():
     return session.get('authentifie')
 
-def est_authentifie_nom():
-    return session.get('authentifie2')
-
 @app.route('/') 
 def hello_world():
     return render_template('hello.html')
@@ -68,7 +65,7 @@ def Readfiche(post_id):
 
 @app.route('/fiche_nom/<string:post_nom>')
 def Readnom(post_nom):
-    if not est_authentifie_nom():
+    if not est_authentifie():
         # Rediriger vers la page d'authentification si l'utilisateur n'est pas authentifié
         return redirect(url_for('authentification_nom'))
     conn = sqlite3.connect('database.db')
